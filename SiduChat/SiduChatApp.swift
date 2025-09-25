@@ -6,15 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct SiduChatApp: App {
-    let persistenceController = PersistenceController.shared
-
+    let databaseManager = DatabaseManager.shared
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            GeometryReader { proxy in
+                ChatView()
+                    .environment(\.screenSize, proxy.size)
+                    .environment(\.databaseManager, databaseManager)
+                    .environment(ToastViewObserver())
+            }
         }
+//        .modelContainer(databaseManager.modelContainer)
     }
 }
