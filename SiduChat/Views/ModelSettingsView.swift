@@ -90,6 +90,9 @@ struct ModelSettingsView<ModelSettingsVM>: View where ModelSettingsVM: ModelSett
                         RoundedRectangle(cornerRadius: 10)
                         
                     )
+                    .onLongPressGesture {
+                        print("aaa")
+                    }
             }
             .buttonStyle(.plain)
             .foregroundStyle(.blue)

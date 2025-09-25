@@ -132,7 +132,6 @@ actor DownloadManager:NSObject {
                 try cacheData.write(to: cachePath)
                 
                 let cacheInfo = CacheInfo(
-//                    downloadLink: savePath.absoluteString,
                     downloadLink: self.urlString,
                     cacheFileName: cachedFileName,
                     totalBytesWritten: totalBytesWritten,
@@ -154,6 +153,8 @@ actor DownloadManager:NSObject {
     func cancel() {
         self.task?.cancel()
         self.task = nil
+        clearCache()
+        
         self.continuation?.finish()
     }
     
@@ -163,6 +164,29 @@ actor DownloadManager:NSObject {
         }
         
         return nil
+    }
+    
+    private func clearCache() {
+        do {
+            // Delete resume data if exist
+            if let data = self.userDefaults.data(forKey: DownloadKey.cacheInfo.rawValue) {
+                let cacheInfo = try JSONDecoder().decode(CacheInfo.self, from: data)
+                guard let cacheUrl = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appending(path: cacheInfo.cacheFileName) else {
+                    self.continuation?.finish(throwing: DownloadError.noResumeData)
+                    return
+                }
+                
+                if FileManager.default.fileExists(atPath: cacheUrl.path()) {
+                    try FileManager.default.removeItem(at: cacheUrl)
+                }
+            }
+            // Delete cache info
+            self.userDefaults.removeObject(forKey: DownloadKey.cacheInfo.rawValue)
+        } catch let error as DecodingError {
+            self.continuation?.finish(throwing: DownloadError.decodingError(error))
+        } catch let error {
+            self.continuation?.finish(throwing: DownloadError.fileSystemError(error))
+        }
     }
     
     private func handleProgress(totalWritten: Int64, expected: Int64) {
@@ -208,8 +232,10 @@ extension DownloadManager: URLSessionDownloadDelegate {
             
             Task {
                 guard let savePath = await self.savePath else { return }
-                
                 try FileManager.default.moveItem(at: tempPath, to: savePath)
+                
+                // Clean the cache
+                await self.clearCache()
                 
                 await self.continuation?.yield(.finished(savePath))
                 await self.continuation?.finish()
