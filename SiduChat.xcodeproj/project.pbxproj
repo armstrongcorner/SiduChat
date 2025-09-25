@@ -51,6 +51,7 @@
 		22C1D12D2E7958CD00839DA6 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C1D12B2E7958CD00839DA6 /* BaseService.swift */; };
 		22C1D12F2E79591300839DA6 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C1D12E2E79591300839DA6 /* BaseResponse.swift */; };
 		22FC4DC42E7D5FA0003F5296 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FC4DC32E7D5FA0003F5296 /* DownloadManager.swift */; };
+		AE255F9E2E853CE1004792B9 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE255F9C2E853CE1004792B9 /* StringUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,15 +118,8 @@
 		22CE0C332E6164FA002715E1 /* SiduChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SiduChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CE0C3D2E6164FA002715E1 /* SiduChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SiduChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FC4DC32E7D5FA0003F5296 /* DownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		AE255F9C2E853CE1004792B9 /* StringUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		2261CC882E8011B1007A3811 /* Utils */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Utils;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		22CE0C1B2E6164F9002715E1 /* Frameworks */ = {
@@ -199,7 +193,7 @@
 		224D6A162E63E29B00D2F87B /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				2261CC882E8011B1007A3811 /* Utils */,
+				AE255F9D2E853CE1004792B9 /* Utils */,
 				22C1D1292E79587F00839DA6 /* Network */,
 				224D6A152E63E29B00D2F87B /* llama-cpp-swift */,
 				224D6A472E66F4B600D2F87B /* Constant.swift */,
@@ -361,6 +355,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AE255F9D2E853CE1004792B9 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AE255F9C2E853CE1004792B9 /* StringUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -375,9 +377,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				2261CC882E8011B1007A3811 /* Utils */,
 			);
 			name = SiduChat;
 			packageProductDependencies = (
@@ -513,6 +512,7 @@
 				224D6A8F2E718D2E00D2F87B /* TopicViewModel.swift in Sources */,
 				22FC4DC42E7D5FA0003F5296 /* DownloadManager.swift in Sources */,
 				224D6A402E644D5C00D2F87B /* UserInputView.swift in Sources */,
+				AE255F9E2E853CE1004792B9 /* StringUtil.swift in Sources */,
 				224D6A212E63E4D700D2F87B /* ModelSettingsViewModel.swift in Sources */,
 				224D6A972E72E95100D2F87B /* TopicEntity.swift in Sources */,
 				224D6A612E6E9F3800D2F87B /* MessageRowView.swift in Sources */,
